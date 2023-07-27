@@ -9,7 +9,7 @@ let instance;
 const bodyClass = document.body.classList
 
 gallery.addEventListener("click", onImageClick)
-document.body.addEventListener("keydown", onEscape)
+// document.body.addEventListener("keydown", onEscape)
 
 function addMarkUp() {
     const markup = galleryItems.map(({ preview, original, description }) => `<li class="gallery__item">
