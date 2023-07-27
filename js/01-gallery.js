@@ -9,7 +9,7 @@ let instance;
 const bodyClass = document.body.classList
 
 gallery.addEventListener("click", onImageClick)
-// document.body.addEventListener("keydown", onEscape)
+document.body.addEventListener("keydown", onEscape)
 
 function addMarkUp() {
     const markup = galleryItems.map(({ preview, original, description }) => `<li class="gallery__item">
@@ -35,46 +35,29 @@ function onImageClick(e) {
 }
 
 function openWindow(url) {
-    const instance = basicLightbox.create(`
+    instance = basicLightbox.create(`
         <img style="border: 5px solid black;"
         src="${url}"/>
-    `,
-    {
-      onShow: (instance) => { document.addEventListener('keydown', onModal) },
-      onClose: (instance) => { document.removeEventListener('keydown', onModal) },
-        }
-    )
-    // instance.show()
-    // classChange(e);
-
-    function onModal(e) {
-        if (e.code === 'Escape') {
-        instance.close()
-        }
-    }
-    
+    `)
     instance.show()
+    classChange();
 
 };
 
-// function classChange(e) {
-    
-//     if (bodyClass.value = "close") {
-//         bodyClass.remove("close")
-//         bodyClass.add("open")
-//         return;
-//     }
-//     bodyClass.remove("close")
-//     bodyClass.add("open")
-//     if (e.key !== "Escape") {
-//         gallery.removeEventListener("click", onImageClick) 
-//     }
-// }
+function classChange() {
+    if (bodyClass.value = "close") {
+        bodyClass.remove("close")
+        bodyClass.add("open")
+        return;
+    }
+    bodyClass.remove("close")
+    bodyClass.add("open")
+}
 
-// function onEscape(e) {
-//     if (e.key === "Escape"&&bodyClass.value==="open") {
-//         instance.close()
-//         classChange(e)
-//         document.body.removeEventListener("keydown", onEscape)
-//     }
-// }
+function onEscape(e) {
+    if (e.key === "Escape"&&bodyClass.value==="open") {
+        instance.close()
+        classChange()
+        document.body.removeEventListener("keydown", onEscape)
+    }
+}
