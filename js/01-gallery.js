@@ -5,11 +5,8 @@ const gallery = document.querySelector(".gallery")
 addMarkUp()
 
 let currUrl;
-let instance;
-const bodyClass = document.body.classList
 
 gallery.addEventListener("click", onImageClick)
-// document.body.addEventListener("keydown", onEscape)
 
 function addMarkUp() {
     const markup = galleryItems.map(({ preview, original, description }) => `<li class="gallery__item">
@@ -44,8 +41,6 @@ function openWindow(url) {
       onClose: (instance) => { document.removeEventListener('keydown', onModal) },
         }
     )
-    // instance.show()
-    // classChange(e);
 
     function onModal(e) {
         if (e.code === 'Escape') {
@@ -56,25 +51,3 @@ function openWindow(url) {
     instance.show()
 
 };
-
-// function classChange(e) {
-    
-//     if (bodyClass.value = "close") {
-//         bodyClass.remove("close")
-//         bodyClass.add("open")
-//         return;
-//     }
-//     bodyClass.remove("close")
-//     bodyClass.add("open")
-//     if (e.key !== "Escape") {
-//         gallery.removeEventListener("click", onImageClick) 
-//     }
-// }
-
-// function onEscape(e) {
-//     if (e.key === "Escape"&&bodyClass.value==="open") {
-//         instance.close()
-//         classChange(e)
-//         document.body.removeEventListener("keydown", onEscape)
-//     }
-// }
