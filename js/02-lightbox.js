@@ -4,8 +4,6 @@ import { galleryItems } from './gallery-items.js';
 const gallery = document.querySelector(".gallery")
 addMarkUp()
 
-gallery.addEventListener("click", onImageClick)
-
 const lightbox = new SimpleLightbox('.gallery a', { captionsData: 'alt', captionDelay: 250});
 
 function addMarkUp() {
@@ -18,6 +16,3 @@ function addMarkUp() {
     gallery.insertAdjacentHTML("beforeend", markup)
 }
 
-function onImageClick(e) {
-    e.preventDefault()
-}

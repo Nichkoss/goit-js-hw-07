@@ -28,32 +28,53 @@ function addMarkUp() {
 
 function onImageClick(e) {
     e.preventDefault()
-    currUrl = e.target.dataset.source
-    openWindow(currUrl)
+    if (e.target.classList.value === "gallery__image") {
+        currUrl = e.target.dataset.source
+        openWindow(currUrl)
+    }
 }
 
 function openWindow(url) {
-    instance = basicLightbox.create(`
+    const instance = basicLightbox.create(`
         <img style="border: 5px solid black;"
         src="${url}"/>
-    `)
-    instance.show()
-    classChange();
-}
+    `,
+    {
+      onShow: (instance) => { document.addEventListener('keydown', onModal) },
+      onClose: (instance) => { document.removeEventListener('keydown', onModal) },
+        }
+    )
+    // instance.show()
+    // classChange(e);
 
-function classChange() {
-    
-    if (bodyClass.value = "close") {
-        bodyClass.remove("close")
-        bodyClass.add("open")
-        return;
-    }
-    bodyClass.remove("close")
-    bodyClass.add("open")
-}
-
-function onEscape(e) {
-    if (e.key === "Escape"&&bodyClass.value==="open") {
+    function onModal(e) {
+        if (e.code === 'Escape') {
         instance.close()
+        }
     }
-}
+    
+    instance.show()
+
+};
+
+// function classChange(e) {
+    
+//     if (bodyClass.value = "close") {
+//         bodyClass.remove("close")
+//         bodyClass.add("open")
+//         return;
+//     }
+//     bodyClass.remove("close")
+//     bodyClass.add("open")
+//     if (e.key !== "Escape") {
+//         gallery.removeEventListener("click", onImageClick) 
+//     }
+// }
+
+// function onEscape(e) {
+//     if (e.key === "Escape"&&bodyClass.value==="open") {
+//         instance.close()
+//         classChange(e)
+//         document.body.removeEventListener("keydown", onEscape)
+//     }
+// }
